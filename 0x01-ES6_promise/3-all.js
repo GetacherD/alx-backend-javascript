@@ -7,7 +7,7 @@ export default function handleProfileSignup() {
 
     for (const v of val) {
       for (const k in v) {
-        if (v[`${k}`]) {
+        if (v[`${k}`] != null) {
           obj[`${k}`] = `${v[k]}`;
         }
       }
