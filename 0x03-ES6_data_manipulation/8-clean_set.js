@@ -3,10 +3,10 @@ export default function cleanSet(st, str) {
   if (!str || typeof str !== 'string') {
     return '';
   }
-  st.forEach((item) => {
+  for (const item of st) {
     if (String(item).startsWith(str)) {
       res.push(String(item).slice(str.length));
     }
-  });
+  }
   return res.join('-');
 }
