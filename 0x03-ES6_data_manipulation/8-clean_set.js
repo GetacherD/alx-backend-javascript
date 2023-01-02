@@ -1,6 +1,6 @@
 export default function cleanSet(st, str) {
   const res = [];
-  if (!str) {
+  if (!str || typeof str !== 'string') {
     return '';
   }
   st.forEach((item) => {
