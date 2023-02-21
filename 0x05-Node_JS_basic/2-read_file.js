@@ -2,9 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const filePath = process.argv[2];
-if (!filePath || !fs.existsSync(path.join(__dirname, filePath)) || filePath.slice(filePath.length - 4, filePath.length - 1) !== 'csv') {
-  throw new Error('Cannot load the database');
-}
+
 const countStudents = () => {
   try {
     const data = fs.readFileSync(filePath, 'utf-8');
