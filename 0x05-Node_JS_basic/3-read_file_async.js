@@ -1,6 +1,7 @@
 const fs = require('fs');
 
-const countSync = (filePath) => new Promise((success, failure) => {
+const filePath = process.argv[2];
+const countSync = () => new Promise((success, failure) => {
   try {
     const data = fs.readFileSync(filePath, 'utf-8');
     const nd = data.split('\n').slice(1);
