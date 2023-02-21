@@ -49,7 +49,7 @@ const countStudents = (filePath) => {
       process.stdout.write('\n');
     });
   } catch (e) {
-    throw new Error('');
+    throw new Error('Cannot load the database');
   }
 };
 module.exports = countStudents;
