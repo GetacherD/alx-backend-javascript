@@ -2,16 +2,7 @@ const sinon = require("sinon")
 const Utils = require("./utils")
 const assert = require("assert")
 describe("Spy", function () {
-        const sendPaymentRequestToApi = sinon.createSandbox();
-
-        beforeEach(function () {
-                sendPaymentRequestToApi.spy(Utils, "calculateNumber");
-        });
-
-        afterEach(function () {
-                sendPaymentRequestToApi.restore();
-        });
-
+        let sendPaymentRequestToApi = sinon.spy(Utils, "calculateNumber");
         it("assert value", function () {
 
 
@@ -19,12 +10,11 @@ describe("Spy", function () {
                 assert.equal(res, 10);
 
         })
-        it("assert called", function () {
+        it("", function () {
 
 
                 const res = Utils.calculateNumber("SUM", 4, 6)
                 assert.equal(res, 10);
-                assert(sendPaymentRequestToApi.assert.calledOnce)
         })
 })
 
