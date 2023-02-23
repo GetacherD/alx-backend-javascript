@@ -1,0 +1,18 @@
+{
+        "scripts": {
+                "test": "mocha"
+        },
+        "dependencies": {
+                "chai": "^4.3.7",
+                "mocha": "^10.2.0"
+        },
+        "name": "0x06-unittests_in_js",
+        "description": "Test in Node JS",
+        "version": "1.0.0",
+        "main": "index.js",
+        "directories": {
+                "test": "test"
+        },
+        "author": "",
+        "license": "ISC"
+}
