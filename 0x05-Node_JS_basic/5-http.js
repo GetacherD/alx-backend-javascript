@@ -66,7 +66,7 @@ const app = http.createServer(async (req, res) => {
       res.write(data);
       res.end();
     } catch (e) {
-      res.end('Error');
+      res.end('Cannot load the database');
     }
   }
 }).listen(1245);
