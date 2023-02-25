@@ -50,8 +50,7 @@ const countSync = (filePath) => new Promise((success, failure) => {
       first = 1;
       result += '\n';
     });
-    console.log(result);
-    success(result);
+    success(result.slice(0, result.length - 1));
   } catch (e) {
     failure(new Error('Cannot load the database'));
   }
@@ -64,7 +63,6 @@ const app = http.createServer(async (req, res) => {
     // eslint-disable-next-line no-use-before-define
     try {
       const data = await countSync(fp);
-      console.log('data is', data);
       res.write(data);
       res.end();
     } catch (e) {
