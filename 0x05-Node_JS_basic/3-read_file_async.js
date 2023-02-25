@@ -1,7 +1,6 @@
 const fs = require('fs');
 
-const filePath = process.argv[2];
-const countSync = () => new Promise((success, failure) => {
+const countSync = (filePath) => new Promise((success, failure) => {
   try {
     const data = fs.readFileSync(filePath, 'utf-8');
     const nd = data.split('\n').slice(1);
@@ -17,7 +16,9 @@ const countSync = () => new Promise((success, failure) => {
         total += 1;
       }
     });
-    let result = `Number of students: ${total}\n`;
+    let result = `Number of students: ${total}`;
+    console.log(result);
+    result = [];
     st.forEach((v) => {
       mp.set(v, 0);
     });
@@ -32,33 +33,33 @@ const countSync = () => new Promise((success, failure) => {
 
     let first = 1;
     mp.forEach((val, key) => {
-      result += `Number of students in ${key}: ${val}. List: `;
+      result = [`Number of students in ${key}: ${val}. List: `];
       nd.forEach((d) => {
         if (d) {
           const va = d.split(',');
           if (va[length] === key) {
             if (first) {
-              result += `${va[0]}`;
+              result.push(`${va[0]}`);
               first = 0;
             } else {
-              result += `, ${va[0]}`;
+              result.push(`, ${va[0]}`);
             }
           }
         }
       });
       first = 1;
-      result += '\n';
+      // result += '\n';
+      console.log(result.join(''));
+      result = [];
     });
-    success(result.slice(0, result.length - 2));
+    success(true);
   } catch (e) {
-    const result = 'Cannot load the database';
-    failure(result);
+    failure(new Error('Cannot load the database'));
   }
 });
 const countStudents = async (filePath) => {
   try {
-    const res = await countSync(filePath);
-    console.log(res);
+    await countSync(filePath);
   } catch (err) {
     throw new Error('Cannot load the database');
   }
