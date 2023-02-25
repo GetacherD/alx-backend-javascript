@@ -1,21 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 
-const filePath = process.argv[2];
-const app = http.createServer((req, res) => {
-  if (req.url === '/') {
-    res.write('Hello Holberton School!');
-    res.end();
-  } else if (req.url === '/students') {
-    // eslint-disable-next-line no-use-before-define
-    countSync(filePath).then((data) => {
-      res.write('This is the list of our students\n');
-      res.write(Buffer.from(data));
-      res.end();
-    });
-  }
-}).listen(1245);
-
+const fp = process.argv[2];
 const countSync = (filePath) => new Promise((success, failure) => {
   try {
     const data = fs.readFileSync(filePath, 'utf-8');
@@ -32,7 +18,7 @@ const countSync = (filePath) => new Promise((success, failure) => {
         total += 1;
       }
     });
-    let result = `Number of students: ${total}\n`;
+    let result = `This is the list of our students\nNumber of students: ${total}\n`;
     st.forEach((v) => {
       mp.set(v, 0);
     });
@@ -64,9 +50,27 @@ const countSync = (filePath) => new Promise((success, failure) => {
       first = 1;
       result += '\n';
     });
+    console.log(result);
     success(result);
   } catch (e) {
     failure(new Error('Cannot load the database'));
   }
 });
+const app = http.createServer(async (req, res) => {
+  if (req.url === '/') {
+    res.write('Hello Holberton School!');
+    res.end();
+  } else if (req.url === '/students') {
+    // eslint-disable-next-line no-use-before-define
+    try {
+      const data = await countSync(fp);
+      console.log('data is', data);
+      res.write(data);
+      res.end();
+    } catch (e) {
+      res.end('Error');
+    }
+  }
+}).listen(1245);
+
 module.exports = app;
